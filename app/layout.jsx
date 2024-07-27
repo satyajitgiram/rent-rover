@@ -1,4 +1,6 @@
 import '@/assets/styles/globals.css';
+import Navbar from '@/components/Navbar';
+
 
 export const metadata = {
     title: 'Rent Rover | Find the perfect Rental',
@@ -11,7 +13,8 @@ const MainLayout = ({children}) => {
   return (
     <html lang='en'>
         <body>
-        <div>{children}</div>
+        <Navbar></Navbar>
+        <main>{children}</main>
         </body>
     </html>
   )
