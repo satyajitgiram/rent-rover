@@ -2,22 +2,41 @@ const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
 // To Fetch all the properties 
 async function fetchProperties() {
-    try{
-        // Handle the case where the domain is not available yet 
-        if (!apiDomain){
-            return [];
-        }
-      const res = await fetch(`${apiDomain}/properties`)
-      if (!res.ok){
-        throw new Error("Failed to fetch Data")
-      }
-      return res.json();
-  
-    }catch(error){
-      console.log(error)
+  try {
+    // Check if the API domain is available
+    if (!apiDomain) {
+      console.log("API domain not available. Returning empty array.");
       return [];
     }
+
+    console.log("Fetching properties from API:", `${apiDomain}/properties`);
+
+    const res = await fetch(`${apiDomain}/properties?timestamp=${new Date().getTime()}`);
+
+    // Log the status of the response
+    console.log("Response status:", res.status);
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch Data. Status: ${res.status}`);
+    }
+
+    // Log when we start parsing the response
+    console.log("Parsing JSON response from properties API...");
+
+    const data = await res.json();
+
+    console.log(" ------------------- Called Fetchproperties function -------");
+    console.log("API Response:", data);  // Log the parsed JSON data for debugging
+
+    return data;
+
+  } catch (error) {
+    // Detailed error logging
+    console.error("Error in fetchProperties function:", error.message);
+    return [];
   }
+}
+
 
 // To Fetch single the propertie 
 async function fetchProperty(id) {
