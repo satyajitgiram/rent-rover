@@ -9,7 +9,6 @@ async function fetchProperties() {
       return [];
     }
 
-    console.log("Fetching properties from API:", `${apiDomain}/properties`);
 
     const res = await fetch(`${apiDomain}/properties?timestamp=${new Date().getTime()}`);
 
@@ -22,12 +21,8 @@ async function fetchProperties() {
 
     // Log when we start parsing the response
     console.log("Parsing JSON response from properties API...");
-
     const data = await res.json();
-
     console.log(" ------------------- Called Fetchproperties function -------");
-    console.log("API Response:", data);  // Log the parsed JSON data for debugging
-
     return data;
 
   } catch (error) {

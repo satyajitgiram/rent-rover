@@ -19,7 +19,6 @@ const PropertyPage = () => {
         if (!id) return ;
         try {
             const property = await fetchProperty(id);
-            console.log(property)
             setProperty(property);
         }
         catch (error){
